@@ -12,6 +12,7 @@ import pl.kala.houseseekerdomain.database.model.document.house.enumeration.House
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)
@@ -50,6 +51,9 @@ public class House {
     private boolean hasBalcony;
 
     private boolean hasBasement;
+
+    @NonNull
+    private LocalDateTime entryDate;
 
 
 }
