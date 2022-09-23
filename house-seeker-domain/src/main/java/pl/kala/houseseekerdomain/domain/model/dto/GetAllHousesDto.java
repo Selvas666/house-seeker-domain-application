@@ -1,15 +1,14 @@
 package pl.kala.houseseekerdomain.domain.model.dto;
 
-import com.mongodb.lang.NonNull;
 import io.vavr.collection.List;
 import lombok.Builder;
 import lombok.Value;
-import org.springframework.data.annotation.Id;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HeatingKind;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseState;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Value
@@ -18,35 +17,35 @@ public class GetAllHousesDto {
 
     String id;
 
-    @NonNull
-    private String localityId;
+    @NotNull
+    String localityName;
 
-    @NonNull
-    private int price;
+    @NotNull
+    int price;
 
-    @NonNull
-    private int squareMeters;
+    @NotNull
+    int squareMeters;
 
-    private List<Media> mediaList;
+    List<Media> mediaList;
 
-    @NonNull
-    private HouseKind houseKind;
+    @NotNull
+    HouseKind houseKind;
 
-    private HouseState houseState;
+    HouseState houseState;
 
-    private HeatingKind heatingKind;
+    HeatingKind heatingKind;
 
-    private int floor;
+    int floor;
 
-    private boolean elevator;
+    boolean elevator;
 
-    private LocalDate buildDate;
+    LocalDate buildDate;
 
-    @NonNull
-    private float pricePerSqMeter;
+    @NotNull
+    float pricePerSqMeter;
 
-    private boolean hasBalcony;
+    boolean hasBalcony;
 
-    private boolean hasBasement;
+    boolean hasBasement;
 
 }
