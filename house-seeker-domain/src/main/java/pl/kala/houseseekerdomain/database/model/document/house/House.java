@@ -47,5 +47,9 @@ public class House {
     @NonNull
     private float pricePerSqMeter;
 
+    private boolean hasBalcony;
+
+    private boolean hasBasement;
+
 
 }
