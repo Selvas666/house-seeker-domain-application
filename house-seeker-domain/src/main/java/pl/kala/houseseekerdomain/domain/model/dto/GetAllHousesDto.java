@@ -3,11 +3,7 @@ package pl.kala.houseseekerdomain.domain.model.dto;
 import io.vavr.collection.List;
 import lombok.Builder;
 import lombok.Value;
-import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HeatingKind;
-import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind;
-import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseState;
-import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
-
+import pl.kala.houseseekerdomain.domain.model.dto.enumeration.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -17,19 +13,15 @@ public class GetAllHousesDto {
 
     String id;
 
-    @NotNull
-    String localityName;
+    @NotNull String localityName;
 
-    @NotNull
-    int price;
+    @NotNull int price;
 
-    @NotNull
-    int squareMeters;
+    @NotNull int squareMeters;
 
     List<Media> mediaList;
 
-    @NotNull
-    HouseKind houseKind;
+    @NotNull HouseKind houseKind;
 
     HouseState houseState;
 
@@ -41,11 +33,16 @@ public class GetAllHousesDto {
 
     LocalDate buildDate;
 
-    @NotNull
-    float pricePerSqMeter;
+    @NotNull float pricePerSqMeter;
 
     boolean hasBalcony;
 
     boolean hasBasement;
+
+    Voivodship voivodship;
+
+    int distanceFromHome;
+
+    int distanceFromRailStation;
 
 }
