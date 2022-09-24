@@ -46,7 +46,7 @@ public class House {
     private LocalDate buildDate;
 
     @NonNull
-    private float pricePerSqMeter;
+    private double pricePerSqMeter;
 
     private boolean hasBalcony;
 

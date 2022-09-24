@@ -1,4 +1,4 @@
-package pl.kala.houseseekerdomain.domain.model.dto;
+package pl.kala.houseseekerdomain.domain.model.response.dto;
 
 import lombok.Builder;
 import lombok.Value;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Value
 @Builder(toBuilder = true)
-public class LocalityDto {
+public class GetLocalityDto {
 
     @NotNull
     String name;

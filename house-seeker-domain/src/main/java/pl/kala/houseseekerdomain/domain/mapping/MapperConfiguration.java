@@ -2,6 +2,9 @@ package pl.kala.houseseekerdomain.domain.mapping;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.kala.houseseekerdomain.domain.mapping.response.GetAllHousesMapper;
+import pl.kala.houseseekerdomain.domain.mapping.response.GetHouseMapper;
+import pl.kala.houseseekerdomain.domain.mapping.response.GetLocalityMapper;
 
 @Configuration
 public class MapperConfiguration {
@@ -11,13 +14,13 @@ public class MapperConfiguration {
     }
 
     @Bean
-    HouseMapper houseMapper(){
-        return new HouseMapper();
+    GetHouseMapper getHouseMapper(){
+        return new GetHouseMapper();
     }
 
     @Bean
-    LocalityMapper localityMapper(){
-        return new LocalityMapper();
+    GetLocalityMapper getLocalityMapper(){
+        return new GetLocalityMapper();
     }
 
 }

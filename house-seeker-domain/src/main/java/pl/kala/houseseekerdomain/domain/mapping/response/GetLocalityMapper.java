@@ -1,12 +1,13 @@
-package pl.kala.houseseekerdomain.domain.mapping;
+package pl.kala.houseseekerdomain.domain.mapping.response;
 
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality;
-import pl.kala.houseseekerdomain.domain.model.dto.LocalityDto;
+import pl.kala.houseseekerdomain.domain.mapping.Mapper;
+import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto;
 
-public class LocalityMapper implements Mapper <Locality, LocalityDto>{
+public class GetLocalityMapper implements Mapper<Locality, GetLocalityDto> {
     @Override
-    public LocalityDto convert(Locality locality) {
-        return LocalityDto.builder()
+    public GetLocalityDto convert(Locality locality) {
+        return GetLocalityDto.builder()
                 .name(locality.getName())
                 .voivodeship(locality.getVoivodship().getLabel())
                 .distanceFromHome(locality.getDistanceFromHome())

@@ -1,4 +1,4 @@
-package pl.kala.houseseekerdomain.domain.model.dto;
+package pl.kala.houseseekerdomain.domain.model.response.dto;
 
 import io.vavr.collection.List;
 import lombok.Builder;
@@ -8,13 +8,13 @@ import java.time.LocalDate;
 
 @Value
 @Builder(toBuilder = true)
-public class HouseDto {
+public class GetHouseDto {
 
     @NotNull
     String id;
 
     @NotNull
-    LocalityDto locality;
+    GetLocalityDto locality;
 
     @NotNull
     int price;
@@ -38,7 +38,7 @@ public class HouseDto {
     LocalDate buildDate;
 
     @NotNull
-    float pricePerSqMeter;
+    double pricePerSqMeter;
 
     boolean hasBalcony;
 

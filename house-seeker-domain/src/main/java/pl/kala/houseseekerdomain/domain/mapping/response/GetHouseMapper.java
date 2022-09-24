@@ -1,22 +1,23 @@
-package pl.kala.houseseekerdomain.domain.mapping;
+package pl.kala.houseseekerdomain.domain.mapping.response;
 
 import lombok.Value;
 import pl.kala.houseseekerdomain.database.model.document.house.House;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
-import pl.kala.houseseekerdomain.domain.model.dto.HouseDto;
-import pl.kala.houseseekerdomain.domain.model.dto.LocalityDto;
+import pl.kala.houseseekerdomain.domain.mapping.Mapper;
+import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto;
+import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto;
 
-public class HouseMapper implements Mapper <HouseMapper.Source, HouseDto> {
+public class GetHouseMapper implements Mapper<GetHouseMapper.Source, GetHouseDto> {
 
     @Value(staticConstructor = "of")
     public static class Source {
         House house;
-        LocalityDto locality;
+        GetLocalityDto locality;
     }
 
     @Override
-    public HouseDto convert(HouseMapper.Source source) {
-        return HouseDto.builder()
+    public GetHouseDto convert(GetHouseMapper.Source source) {
+        return GetHouseDto.builder()
                 .id(source.getHouse().getId())
                 .locality(source.getLocality())
                 .price(source.getHouse().getPrice())
