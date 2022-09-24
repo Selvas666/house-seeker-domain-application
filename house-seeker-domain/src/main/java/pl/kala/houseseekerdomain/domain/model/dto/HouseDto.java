@@ -3,7 +3,6 @@ package pl.kala.houseseekerdomain.domain.model.dto;
 import io.vavr.collection.List;
 import lombok.Builder;
 import lombok.Value;
-import pl.kala.houseseekerdomain.domain.model.dto.enumeration.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -11,21 +10,26 @@ import java.time.LocalDate;
 @Builder(toBuilder = true)
 public class HouseDto {
 
+    @NotNull
     String id;
 
-    @NotNull LocalityDto locality;
+    @NotNull
+    LocalityDto locality;
 
-    @NotNull int price;
+    @NotNull
+    int price;
 
-    @NotNull int squareMeters;
+    @NotNull
+    int squareMeters;
 
-    List<Media> mediaList;
+    List<String> mediaList;
 
-    @NotNull HouseKind houseKind;
+    @NotNull
+    String houseKind;
 
-    HouseState houseState;
+    String houseState;
 
-    HeatingKind heatingKind;
+    String heatingKind;
 
     int floor;
 
@@ -33,7 +37,8 @@ public class HouseDto {
 
     LocalDate buildDate;
 
-    @NotNull float pricePerSqMeter;
+    @NotNull
+    float pricePerSqMeter;
 
     boolean hasBalcony;
 
