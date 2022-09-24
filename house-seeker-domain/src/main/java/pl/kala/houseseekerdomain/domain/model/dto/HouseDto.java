@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 @Value
 @Builder(toBuilder = true)
-public class GetAllHousesDto {
+public class HouseDto {
 
     String id;
 
-    @NotNull String localityName;
+    @NotNull LocalityDto locality;
 
     @NotNull int price;
 
@@ -38,11 +38,5 @@ public class GetAllHousesDto {
     boolean hasBalcony;
 
     boolean hasBasement;
-
-    Voivodship voivodship;
-
-    int distanceFromHome;
-
-    int distanceFromRailStation;
 
 }
