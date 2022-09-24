@@ -19,7 +19,7 @@ public class Locality {
 
     private Voivodship voivodship;
 
-    private int distanceFromHome;
+    private Double distanceFromHome;
 
-    private int distanceFromRailStation;
+    private Double distanceFromRailStation;
 }

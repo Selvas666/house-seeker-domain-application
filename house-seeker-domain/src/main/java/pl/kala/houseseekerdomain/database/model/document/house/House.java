@@ -10,7 +10,6 @@ import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Heati
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseState;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -25,35 +24,33 @@ public class House {
     private String localityId;
 
     @NonNull
-    private int price;
+    private Double price;
 
     @NonNull
-    private int squareMeters;
-
-    private List<Media> mediaList;
+    private Double squareMeters;
 
     @NonNull
     private HouseKind houseKind;
+
+    @NonNull
+    private Double pricePerSqMeter;
+
+    @NonNull
+    private LocalDateTime entryDate;
+
+    private List<Media> mediaList;
 
     private HouseState houseState;
 
     private HeatingKind heatingKind;
 
-    private int floor;
+    private Integer floor;
 
-    private boolean elevator;
+    private Boolean elevator;
 
     private LocalDate buildDate;
 
-    @NonNull
-    private double pricePerSqMeter;
+    private Boolean hasBalcony;
 
-    private boolean hasBalcony;
-
-    private boolean hasBasement;
-
-    @NonNull
-    private LocalDateTime entryDate;
-
-
+    private Boolean hasBasement;
 }

@@ -17,10 +17,13 @@ public class GetHouseDto {
     GetLocalityDto locality;
 
     @NotNull
-    int price;
+    Double price;
 
     @NotNull
-    int squareMeters;
+    Double squareMeters;
+
+    @NotNull
+    Double pricePerSqMeter;
 
     List<String> mediaList;
 
@@ -31,17 +34,14 @@ public class GetHouseDto {
 
     String heatingKind;
 
-    int floor;
+    Integer floor;
 
-    boolean elevator;
+    Boolean elevator;
 
     LocalDate buildDate;
 
-    @NotNull
-    double pricePerSqMeter;
+    Boolean hasBalcony;
 
-    boolean hasBalcony;
-
-    boolean hasBasement;
+    Boolean hasBasement;
 
 }

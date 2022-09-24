@@ -30,16 +30,16 @@ public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, Hous
                 .houseState(source.getCreateHouseDto().getHouseState())
                 .heatingKind(source.getCreateHouseDto().getHeatingKind())
                 .floor(source.getCreateHouseDto().getFloor())
-                .elevator(source.getCreateHouseDto().isElevator())
+                .elevator(source.getCreateHouseDto().getElevator())
                 .buildDate(source.getCreateHouseDto().getBuildDate())
                 .pricePerSqMeter(calculatePricePerMeter(source.getCreateHouseDto()))
-                .hasBalcony(source.getCreateHouseDto().isHasBalcony())
-                .hasBasement(source.getCreateHouseDto().isHasBasement())
+                .hasBalcony(source.getCreateHouseDto().getHasBalcony())
+                .hasBasement(source.getCreateHouseDto().getHasBasement())
                 .entryDate(LocalDateTime.now())
                 .build();
     }
 
-    private double calculatePricePerMeter(CreateHouseDto createHouseDto){
+    private Double calculatePricePerMeter(CreateHouseDto createHouseDto){
         return BigDecimal.valueOf(createHouseDto.getPrice())
                 .setScale(2, RoundingMode.HALF_UP)
                 .divide(

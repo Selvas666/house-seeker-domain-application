@@ -14,7 +14,7 @@ public class GetLocalityDto {
 
     String voivodeship;
 
-    int distanceFromHome;
+    Double distanceFromHome;
 
-    int distanceFromRailStation;
+    Double distanceFromRailStation;
 }

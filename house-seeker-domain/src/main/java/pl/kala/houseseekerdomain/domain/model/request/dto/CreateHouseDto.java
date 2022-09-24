@@ -19,10 +19,10 @@ public class CreateHouseDto {
     String locality;
 
     @NotNull
-    int price;
+    Double price;
 
     @NotNull
-    int squareMeters;
+    Double squareMeters;
 
     List<Media> mediaList;
 
@@ -33,13 +33,13 @@ public class CreateHouseDto {
 
     HeatingKind heatingKind;
 
-    int floor;
+    Integer floor;
 
-    boolean elevator;
+    Boolean elevator;
 
     LocalDate buildDate;
 
-    boolean hasBalcony;
+    Boolean hasBalcony;
 
-    boolean hasBasement;
+    Boolean hasBasement;
 }

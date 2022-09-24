@@ -26,11 +26,11 @@ public class GetHouseMapper implements Mapper<GetHouseMapper.Source, GetHouseDto
                 .houseKind(source.getHouse().getHouseKind().getLabel())
                 .heatingKind(source.getHouse().getHeatingKind().getLabel())
                 .floor(source.getHouse().getFloor())
-                .elevator(source.getHouse().isElevator())
+                .elevator(source.getHouse().getElevator())
                 .buildDate(source.getHouse().getBuildDate())
                 .pricePerSqMeter(source.getHouse().getPricePerSqMeter())
-                .hasBalcony(source.getHouse().isHasBalcony())
-                .hasBasement(source.getHouse().isHasBasement())
+                .hasBalcony(source.getHouse().getHasBalcony())
+                .hasBasement(source.getHouse().getHasBasement())
                 .build();
     }
 }
