@@ -26,6 +26,7 @@ public class GetHouseMapper implements Mapper<GetHouseMapper.Source, GetHouseDto
                 .squareMeters(source.getHouse().getSquareMeters())
                 .houseKind(source.getHouse().getHouseKind().getLabel())
                 .mediaList(source.getHouse().getMediaList() == null ? List.empty() : List.ofAll(source.getHouse().getMediaList().map(Media::getLabel)))
+                .houseState(source.getHouse().getHouseState() == null ? MapperUtils.emptyString() : source.getHouse().getHouseState().getLabel())
                 .heatingKind(source.getHouse().getHeatingKind() == null ? MapperUtils.emptyString() : source.getHouse().getHeatingKind().getLabel())
                 .floor(source.getHouse().getFloor())
                 .elevator(source.getHouse().getElevator())

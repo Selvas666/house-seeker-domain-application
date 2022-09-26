@@ -37,6 +37,31 @@ class GetHouseMapperSpec extends UnitSpecificationConfiguration{
         result.getSquareMeters() == house.getSquareMeters()
         result.getPricePerSqMeter() == house.getPricePerSqMeter()
         result.getHouseKind() == house.getHouseKind().getLabel()
+    }
 
+    def "GetHouseMapper mapping a source object with all fields filled in" () {
+        given:"A House object that has all of its fields filled in"
+        House house = House.random()
+        and: "a GetLocalityDto with all the field filled in"
+        GetLocalityDto getLocalityDto = GetLocalityDto.random()
+        and:"A source object constructed of the two"
+        GetHouseMapper.Source source = GetHouseMapper.Source.of(house, getLocalityDto)
+        when:"The mapper maps the object"
+        GetHouseDto result = mapper.convert(source)
+        then:"Resulting object has all the fields mapped properly"
+        result.getId() == house.getId()
+        result.getLocality() == getLocalityDto
+        result.getPrice() == house.getPrice()
+        result.getSquareMeters() == house.getSquareMeters()
+        result.getPricePerSqMeter() == house.getPricePerSqMeter()
+        result.getHouseKind() == house.getHouseKind().getLabel()
+        result.getMediaList() == house.getMediaList().map(n -> n.getLabel())
+        result.getHouseState() == house.getHouseState().getLabel()
+        result.getHeatingKind() == house.getHeatingKind().getLabel()
+        result.getFloor() == house.getFloor()
+        result.getElevator() == house.getElevator()
+        result.getBuildDate() == house.getBuildDate()
+        result.getHasBalcony() == house.getHasBalcony()
+        result.getHasBasement() == house.getHasBasement()
     }
 }
