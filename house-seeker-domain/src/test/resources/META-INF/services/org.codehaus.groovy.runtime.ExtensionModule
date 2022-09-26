@@ -1,0 +1,3 @@
+moduleName = helper-module
+moduleVersion = 1.0
+extensionClasses = pl.kala.houseseekerdomain.util.Random
