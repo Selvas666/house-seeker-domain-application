@@ -1,5 +1,6 @@
 package pl.kala.houseseekerdomain.domain.mapping.response
 
+import io.vavr.collection.List
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.database.model.document.house.House
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind
@@ -8,47 +9,55 @@ import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto
 
 import java.time.LocalDateTime
 
-class GetHouseMapperSpec extends UnitSpecificationConfiguration{
+class GetHouseMapperSpec extends UnitSpecificationConfiguration {
     def mapper = new GetHouseMapper()
 
-    def "GetHouseMapper mapping a source object with only @NonNull fields filled in" (){
-        given:"A House object that has only @NonNull filled in: id, localityId, price, squareMeters, houseKind, pricePerSqMeter, entryDate"
+    def "GetHouseMapper mapping a source object with only @NonNull fields filled in"() {
+        given: "A House object that has only @NonNull filled in: id, localityId, price, squareMeters, houseKind, pricePerSqMeter, entryDate"
         House house = House.builder()
-        .id("1")
-        .localityId("2")
-        .price(60000)
-        .squareMeters(60.55)
-        .houseKind(HouseKind.APARTMENT)
-        .pricePerSqMeter(5000.55)
-        .entryDate(LocalDateTime.now())
-        .build()
+                .id("1")
+                .localityId("2")
+                .price(60000)
+                .squareMeters(60.55)
+                .houseKind(HouseKind.APARTMENT)
+                .pricePerSqMeter(5000.55)
+                .entryDate(LocalDateTime.now())
+                .build()
         and: "a GetLocalityDto with only the name field filled in"
         GetLocalityDto getLocalityDto = GetLocalityDto.builder()
-        .name("Wrocław")
-        .build()
-        and:"A source object constructed of the two"
+                .name("Wrocław")
+                .build()
+        and: "A source object constructed of the two"
         GetHouseMapper.Source source = GetHouseMapper.Source.of(house, getLocalityDto)
-        when:"The mapper maps the object"
+        when: "The mapper maps the object"
         GetHouseDto result = mapper.convert(source)
-        then:"Resulting object has only @NotNull fields filled in: id, locality, price, squareMeters, pricePerSqMeter, houseKind"
+        then: "Resulting object has only @NotNull fields filled in: id, locality, price, squareMeters, pricePerSqMeter, houseKind"
         result.getId() == house.getId()
         result.getLocality() == getLocalityDto
         result.getPrice() == house.getPrice()
         result.getSquareMeters() == house.getSquareMeters()
         result.getPricePerSqMeter() == house.getPricePerSqMeter()
         result.getHouseKind() == house.getHouseKind().getLabel()
+        result.getMediaList() == List.empty()
+        result.getHouseState() == ""
+        result.getHeatingKind() == ""
+        result.getFloor() == null
+        result.getElevator() == null
+        result.getBuildDate() == null
+        result.getHasBalcony() == null
+        result.getHasBasement() == null
     }
 
-    def "GetHouseMapper mapping a source object with all fields filled in" () {
-        given:"A House object that has all of its fields filled in"
+    def "GetHouseMapper mapping a source object with all fields filled in"() {
+        given: "A House object that has all of its fields filled in"
         House house = House.random()
         and: "a GetLocalityDto with all the field filled in"
         GetLocalityDto getLocalityDto = GetLocalityDto.random()
-        and:"A source object constructed of the two"
+        and: "A source object constructed of the two"
         GetHouseMapper.Source source = GetHouseMapper.Source.of(house, getLocalityDto)
-        when:"The mapper maps the object"
+        when: "The mapper maps the object"
         GetHouseDto result = mapper.convert(source)
-        then:"Resulting object has all the fields mapped properly"
+        then: "Resulting object has all the fields mapped properly"
         result.getId() == house.getId()
         result.getLocality() == getLocalityDto
         result.getPrice() == house.getPrice()
