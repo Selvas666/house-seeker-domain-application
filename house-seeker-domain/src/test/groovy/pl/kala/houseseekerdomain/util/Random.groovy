@@ -2,6 +2,7 @@ package pl.kala.houseseekerdomain.util
 
 import io.github.xshadov.easyrandom.vavr.VavrRandomizerRegistry
 import io.github.xshadov.easyrandom.vavr.factory.VavrRandomizerFactory
+import io.vavr.collection.List
 import org.jeasy.random.EasyRandom
 import org.jeasy.random.EasyRandomParameters
 
@@ -25,5 +26,9 @@ class Random {
 
     static <T> T random(Class<T> clazz) {
         return randomizer.nextObject(clazz)
+    }
+
+    static <T> List<T> randomList(Class<T> clazz, int length){
+        return List.ofAll(randomizer.objects(clazz, length))
     }
 }
