@@ -25,10 +25,10 @@ public class GetHouseDto {
     @NotNull
     Double pricePerSqMeter;
 
-    List<String> mediaList;
-
     @NotNull
     String houseKind;
+
+    List<String> mediaList;
 
     String houseState;
 

@@ -1,7 +1,6 @@
 package pl.kala.houseseekerdomain.util
 
 import io.github.xshadov.easyrandom.vavr.VavrRandomizerRegistry
-import io.github.xshadov.easyrandom.vavr.factory.VavrRandomizerFactory
 import io.vavr.collection.List
 import org.jeasy.random.EasyRandom
 import org.jeasy.random.EasyRandomParameters
