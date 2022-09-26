@@ -3,7 +3,6 @@ package pl.kala.houseseekerdomain.domain.mapping.request
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality
-import pl.kala.houseseekerdomain.domain.model.request.dto.CreateHouseDto
 
 import io.vavr.collection.List
 

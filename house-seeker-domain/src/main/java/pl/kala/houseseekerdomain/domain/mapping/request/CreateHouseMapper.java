@@ -5,7 +5,7 @@ import lombok.Value;
 import pl.kala.houseseekerdomain.database.model.document.house.House;
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality;
 import pl.kala.houseseekerdomain.domain.mapping.Mapper;
-import pl.kala.houseseekerdomain.domain.model.request.dto.CreateHouseDto;
+import pl.kala.houseseekerdomain.domain.model.request.CreateHouseRequest;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,7 +15,7 @@ public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, Hous
 
     @Value(staticConstructor = "of")
     public static class Source {
-        CreateHouseDto createHouseDto;
+        CreateHouseRequest createHouseRequest;
         Locality locality;
     }
 
@@ -23,23 +23,23 @@ public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, Hous
     public House convert(CreateHouseMapper.Source source) {
         return House.builder()
                 .localityId(source.getLocality().getId())
-                .price(source.getCreateHouseDto().getPrice())
-                .squareMeters(source.getCreateHouseDto().getSquareMeters())
-                .mediaList(source.getCreateHouseDto().getMediaList() != null ? source.getCreateHouseDto().getMediaList() : List.empty())
-                .houseKind(source.getCreateHouseDto().getHouseKind())
-                .houseState(source.getCreateHouseDto().getHouseState())
-                .heatingKind(source.getCreateHouseDto().getHeatingKind())
-                .floor(source.getCreateHouseDto().getFloor())
-                .elevator(source.getCreateHouseDto().getElevator())
-                .buildDate(source.getCreateHouseDto().getBuildDate())
-                .pricePerSqMeter(calculatePricePerMeter(source.getCreateHouseDto()))
-                .hasBalcony(source.getCreateHouseDto().getHasBalcony())
-                .hasBasement(source.getCreateHouseDto().getHasBasement())
+                .price(source.getCreateHouseRequest().getPrice())
+                .squareMeters(source.getCreateHouseRequest().getSquareMeters())
+                .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList() : List.empty())
+                .houseKind(source.getCreateHouseRequest().getHouseKind())
+                .houseState(source.getCreateHouseRequest().getHouseState())
+                .heatingKind(source.getCreateHouseRequest().getHeatingKind())
+                .floor(source.getCreateHouseRequest().getFloor())
+                .elevator(source.getCreateHouseRequest().getElevator())
+                .buildDate(source.getCreateHouseRequest().getBuildDate())
+                .pricePerSqMeter(calculatePricePerMeter(source.getCreateHouseRequest()))
+                .hasBalcony(source.getCreateHouseRequest().getHasBalcony())
+                .hasBasement(source.getCreateHouseRequest().getHasBasement())
                 .entryDate(LocalDateTime.now())
                 .build();
     }
 
-    private Double calculatePricePerMeter(CreateHouseDto createHouseDto){
+    private Double calculatePricePerMeter(CreateHouseRequest createHouseDto){
         return BigDecimal.valueOf(createHouseDto.getPrice())
                 .setScale(2, RoundingMode.HALF_UP)
                 .divide(

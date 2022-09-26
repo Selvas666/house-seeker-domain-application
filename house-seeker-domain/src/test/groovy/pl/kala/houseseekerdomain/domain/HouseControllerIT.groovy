@@ -8,25 +8,22 @@ import org.springframework.boot.test.web.server.LocalServerPort
 import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
 
 @Slf4j
-class HouseControllerIT extends IntegrationSpecificationConfiguration{
+class HouseControllerIT extends IntegrationSpecificationConfiguration {
     @LocalServerPort
     int port
-    def"I cant save a house" () {
-        given: "a minimum possible body for saving a house"
-        log.info("The port of silver is:${port.toString()}")
+
+    def "I can save a house"() {
+        given: "A proper config"
         RestAssured.port = port
         RequestSpecification request = RestAssured.given()
         request.basePath("/api/house/save")
+        and: "A minimum possible body for saving a house"
         File body = new File("src/test/resources/json/request/saveHouseMin.json")
-
         request.contentType(ContentType.JSON)
         request.body(body)
-
-
-        when:"we send that"
+        when: "We send that request"
         def result = request.post()
-
-        then:"it should get positive response xd"
+        then: "It should return code 200"
         result.statusCode() == 200
 
     }
