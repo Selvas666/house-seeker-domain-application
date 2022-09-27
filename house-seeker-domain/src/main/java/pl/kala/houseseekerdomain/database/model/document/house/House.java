@@ -1,7 +1,6 @@
 package pl.kala.houseseekerdomain.database.model.document.house;
 
 import com.mongodb.lang.NonNull;
-import io.vavr.collection.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -10,8 +9,10 @@ import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Heati
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseState;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder(toBuilder = true)
