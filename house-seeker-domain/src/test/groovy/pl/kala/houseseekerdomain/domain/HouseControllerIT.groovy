@@ -4,9 +4,7 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import lombok.extern.slf4j.Slf4j
-import org.hamcrest.Matcher
 import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
-import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto
 
 @Slf4j
 class HouseControllerIT extends IntegrationSpecificationConfiguration {
@@ -25,7 +23,7 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
         result.statusCode() == 200
     }
 
-    def "I can get 2 houses I can save"(){
+    def "I can get 2 houses I can save"() {
         given: "A proper config"
         RequestSpecification saveRequest = RestAssured.given()
         saveRequest.basePath("/api/house/save")
