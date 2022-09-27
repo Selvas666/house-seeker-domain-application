@@ -13,6 +13,8 @@ import pl.kala.houseseekerdomain.domain.model.response.GetAllHousesResponse;
 @RequestMapping("/api/house")
 @RequiredArgsConstructor
 public class HouseController {
+
+    //TODO: add request/response logging
     private final HouseApi houseApi;
 
     @PostMapping("/save")

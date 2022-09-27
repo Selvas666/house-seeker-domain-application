@@ -4,23 +4,33 @@ import io.restassured.RestAssured
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.context.TestPropertySource
-import spock.lang.Shared
+import pl.kala.houseseekerdomain.database.repository.HouseRepository
+import pl.kala.houseseekerdomain.database.repository.LocalityRepository
 import spock.lang.Specification
 
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-integration.properties")
-class IntegrationSpecificationConfiguration extends Specification{
+class IntegrationSpecificationConfiguration extends Specification {
     protected static final Logger log = LoggerFactory.getLogger("RestAssuredTestsLogger")
 
+    @LocalServerPort
+    int port
 
+    @Autowired
+    LocalityRepository localityRepository
 
-//    def setupSpec() {
-//        log.info("The port of gold is:${port.toString()}")
-//        RestAssured.port = port
-//    }
+    @Autowired
+    HouseRepository houseRepository
+
+    def setup() {
+        RestAssured.port = port
+        houseRepository.deleteAll()
+        localityRepository.deleteAll()
+    }
 
 }
