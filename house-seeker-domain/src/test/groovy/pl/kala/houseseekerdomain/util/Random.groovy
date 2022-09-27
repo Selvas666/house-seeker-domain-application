@@ -1,9 +1,10 @@
 package pl.kala.houseseekerdomain.util
 
 import io.github.xshadov.easyrandom.vavr.VavrRandomizerRegistry
-import io.vavr.collection.List
 import org.jeasy.random.EasyRandom
 import org.jeasy.random.EasyRandomParameters
+
+import java.util.stream.Collectors
 
 class Random {
 
@@ -28,6 +29,6 @@ class Random {
     }
 
     static <T> List<T> randomList(Class<T> clazz, int length){
-        return List.ofAll(randomizer.objects(clazz, length))
+        return randomizer.objects(clazz, length).collect(Collectors.toList())
     }
 }

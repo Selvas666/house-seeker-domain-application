@@ -17,6 +17,7 @@ public class HouseController {
 
     @PostMapping("/save")
     ResponseEntity<Void> saveHouse(@RequestBody CreateHouseRequest request) {
+        //TODO: add return type
         houseApi.saveHouse(request)
                 .onFailure(ex -> log.error("Failed to save house - {}", ex.getMessage()));
         return ResponseEntity.ok().build();

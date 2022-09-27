@@ -4,6 +4,8 @@ import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto
 
+import java.time.LocalDateTime
+
 class GetLocalityMapperSpec extends UnitSpecificationConfiguration {
     GetLocalityMapper mapper = new GetLocalityMapper()
 
@@ -12,12 +14,13 @@ class GetLocalityMapperSpec extends UnitSpecificationConfiguration {
         Locality locality = Locality.builder()
                 .id("1")
                 .name("Wrocław")
+                .entryDate(LocalDateTime.now())
                 .build()
         when: "The mapper maps the object"
         GetLocalityDto result = mapper.convert(locality)
         then: "We get a GetLocalityDto object with only name field filled in"
         result.getName() == locality.getName()
-        result.getVoivodeship() == ""
+        result.getVoivodeship() == null
         result.getDistanceFromHome() == null
         result.getDistanceFromRailStation() == null
     }

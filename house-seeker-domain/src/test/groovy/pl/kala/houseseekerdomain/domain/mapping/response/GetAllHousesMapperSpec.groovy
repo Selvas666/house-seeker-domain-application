@@ -1,6 +1,5 @@
 package pl.kala.houseseekerdomain.domain.mapping.response
 
-import io.vavr.collection.List
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.domain.model.response.GetAllHousesResponse
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto
@@ -11,11 +10,11 @@ class GetAllHousesMapperSpec extends UnitSpecificationConfiguration {
 
     def "Test GetAllHousesMapper mapping an empty list"() {
         given: "an empty GetHouseDto list"
-        List<GetHouseDto> houseList = List.empty()
+        List<GetHouseDto> houseList = Collections.emptyList()
         when: "the mapper maps the empty list"
         GetAllHousesResponse result = mapper.convert(houseList)
         then: "the list in resulting GetAllHousesResponse is empty and totalElements == 0"
-        result.getHouses() == List.empty()
+        result.getHouses() == Collections.emptyList()
         result.getTotalElements() == 0
     }
 
@@ -25,8 +24,8 @@ class GetAllHousesMapperSpec extends UnitSpecificationConfiguration {
         when: "the mapper maps the list"
         GetAllHousesResponse result = mapper.convert(houseList)
         then: "the list in resulting GetAllHousesResponse is not empty and has the totalElements == source list length"
-        result.getHouses() != List.empty()
-        result.getTotalElements() == houseList.length()
+        result.getHouses() != Collections.emptyList()
+        result.getTotalElements() == houseList.size()
     }
 
 }

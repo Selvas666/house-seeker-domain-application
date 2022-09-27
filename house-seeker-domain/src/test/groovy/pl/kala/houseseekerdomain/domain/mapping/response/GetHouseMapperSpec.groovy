@@ -1,6 +1,6 @@
 package pl.kala.houseseekerdomain.domain.mapping.response
 
-import io.vavr.collection.List
+
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.database.model.document.house.House
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind
@@ -8,6 +8,7 @@ import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto
 
 import java.time.LocalDateTime
+import java.util.stream.Collectors
 
 class GetHouseMapperSpec extends UnitSpecificationConfiguration {
     def mapper = new GetHouseMapper()
@@ -38,9 +39,9 @@ class GetHouseMapperSpec extends UnitSpecificationConfiguration {
         result.getSquareMeters() == house.getSquareMeters()
         result.getPricePerSqMeter() == house.getPricePerSqMeter()
         result.getHouseKind() == house.getHouseKind().getLabel()
-        result.getMediaList() == List.empty()
-        result.getHouseState() == ""
-        result.getHeatingKind() == ""
+        result.getMediaList() == null
+        result.getHouseState() == null
+        result.getHeatingKind() == null
         result.getFloor() == null
         result.getElevator() == null
         result.getBuildDate() == null
@@ -64,7 +65,8 @@ class GetHouseMapperSpec extends UnitSpecificationConfiguration {
         result.getSquareMeters() == house.getSquareMeters()
         result.getPricePerSqMeter() == house.getPricePerSqMeter()
         result.getHouseKind() == house.getHouseKind().getLabel()
-        result.getMediaList() == house.getMediaList().map(n -> n.getLabel())
+        result.getMediaList().size() == house.getMediaList().size()
+        result.getMediaList() == house.getMediaList().stream().map(n -> n.getLabel()).collect(Collectors.toList())
         result.getHouseState() == house.getHouseState().getLabel()
         result.getHeatingKind() == house.getHeatingKind().getLabel()
         result.getFloor() == house.getFloor()

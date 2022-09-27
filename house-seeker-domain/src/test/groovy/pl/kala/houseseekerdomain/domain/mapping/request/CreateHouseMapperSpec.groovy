@@ -1,10 +1,12 @@
 package pl.kala.houseseekerdomain.domain.mapping.request
 
-import io.vavr.collection.List
+
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.HouseKind
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality
 import pl.kala.houseseekerdomain.domain.model.request.CreateHouseRequest
+
+import java.time.LocalDateTime
 
 class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
 
@@ -22,6 +24,7 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         def locality = Locality.builder()
                 .id("1")
                 .name("Wrocław")
+                .entryDate(LocalDateTime.now())
                 .build()
         and: "A Source object of the two"
         def source = CreateHouseMapper.Source.of(createHouseRequest, locality)
@@ -35,7 +38,7 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         result.getHouseKind() == createHouseRequest.getHouseKind()
         result.getPricePerSqMeter() != null
         result.getEntryDate() != null
-        result.getMediaList() == List.empty()
+        result.getMediaList() == null
         result.getHouseState() == null
         result.getHeatingKind() == null
         result.getFloor() == null
@@ -62,7 +65,7 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         result.getHouseKind() == createHouseRequest.getHouseKind()
         result.getPricePerSqMeter() != null
         result.getEntryDate() != null
-        result.getMediaList().length() == createHouseRequest.getMediaList().length()
+        result.getMediaList().size() == createHouseRequest.getMediaList().length()
         result.getMediaList().get(0) == createHouseRequest.getMediaList().get(0)
         result.getHouseState() == createHouseRequest.getHouseState()
         result.getHeatingKind() == createHouseRequest.getHeatingKind()
@@ -85,6 +88,7 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         def locality = Locality.builder()
                 .id("1")
                 .name("Wrocław")
+                .entryDate(LocalDateTime.now())
                 .build()
         and: "A Source object of the two"
         def source = CreateHouseMapper.Source.of(createHouseRequest, locality)

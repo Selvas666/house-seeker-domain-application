@@ -25,7 +25,7 @@ public class CreateHouseMapper implements Mapper<CreateHouseMapper.Source, House
                 .localityId(source.getLocality().getId())
                 .price(source.getCreateHouseRequest().getPrice())
                 .squareMeters(source.getCreateHouseRequest().getSquareMeters())
-                .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList().toJavaList() : Collections.emptyList())
+                .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList().toJavaList() : null)
                 .houseKind(source.getCreateHouseRequest().getHouseKind())
                 .houseState(source.getCreateHouseRequest().getHouseState())
                 .heatingKind(source.getCreateHouseRequest().getHeatingKind())

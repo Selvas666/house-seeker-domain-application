@@ -25,6 +25,5 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
         def result = request.post()
         then: "It should return code 200"
         result.statusCode() == 200
-
     }
 }
