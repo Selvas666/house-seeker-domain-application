@@ -1,6 +1,5 @@
 package pl.kala.houseseekerdomain.domain.mapping.request;
 
-import io.vavr.collection.List;
 import lombok.Value;
 import pl.kala.houseseekerdomain.database.model.document.house.House;
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality;
@@ -10,8 +9,9 @@ import pl.kala.houseseekerdomain.domain.model.request.CreateHouseRequest;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
-public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, House> {
+public class CreateHouseMapper implements Mapper<CreateHouseMapper.Source, House> {
 
     @Value(staticConstructor = "of")
     public static class Source {
@@ -25,7 +25,7 @@ public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, Hous
                 .localityId(source.getLocality().getId())
                 .price(source.getCreateHouseRequest().getPrice())
                 .squareMeters(source.getCreateHouseRequest().getSquareMeters())
-                .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList() : List.empty())
+                .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList().toJavaList() : Collections.emptyList())
                 .houseKind(source.getCreateHouseRequest().getHouseKind())
                 .houseState(source.getCreateHouseRequest().getHouseState())
                 .heatingKind(source.getCreateHouseRequest().getHeatingKind())
@@ -39,14 +39,14 @@ public class CreateHouseMapper implements Mapper <CreateHouseMapper.Source, Hous
                 .build();
     }
 
-    private Double calculatePricePerMeter(CreateHouseRequest createHouseDto){
+    private Double calculatePricePerMeter(CreateHouseRequest createHouseDto) {
         return BigDecimal.valueOf(createHouseDto.getPrice())
                 .setScale(2, RoundingMode.HALF_UP)
                 .divide(
                         BigDecimal.valueOf(createHouseDto.getSquareMeters())
                                 .setScale(2, RoundingMode.HALF_UP),
                         RoundingMode.HALF_UP
-                        )
+                )
                 .doubleValue();
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.kala.houseseekerdomain.database.model.document.locality.enumeration.Voivodship;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder(toBuilder = true)
 @Document(collection = "localities")
@@ -16,6 +18,9 @@ public class Locality {
 
     @NonNull
     private String name;
+
+    @NonNull
+    private LocalDateTime entryDate;
 
     private Voivodship voivodship;
 

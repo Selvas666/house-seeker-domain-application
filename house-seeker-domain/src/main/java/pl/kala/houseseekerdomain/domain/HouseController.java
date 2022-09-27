@@ -24,7 +24,7 @@ public class HouseController {
 
     @GetMapping("/all")
     ResponseEntity<GetAllHousesResponse> getAllHouses() {
-        GetAllHousesResponse response =  houseApi.getAllHouses()
+        GetAllHousesResponse response = houseApi.getAllHouses()
                 .onFailure(ex -> log.error("Failed to get all houses - {}", ex.getMessage()))
                 .get();
         return ResponseEntity.ok(response);

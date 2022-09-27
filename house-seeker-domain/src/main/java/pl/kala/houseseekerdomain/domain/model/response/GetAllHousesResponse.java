@@ -1,9 +1,10 @@
 package pl.kala.houseseekerdomain.domain.model.response;
 
-import io.vavr.collection.List;
 import lombok.Builder;
 import lombok.Value;
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto;
+
+import java.util.List;
 
 @Value
 @Builder(toBuilder = true)

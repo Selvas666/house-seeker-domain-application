@@ -1,6 +1,5 @@
 package pl.kala.houseseekerdomain.domain.mapping.response;
 
-import io.vavr.collection.List;
 import lombok.Value;
 import pl.kala.houseseekerdomain.database.model.document.house.House;
 import pl.kala.houseseekerdomain.database.model.document.house.enumeration.Media;
@@ -8,6 +7,9 @@ import pl.kala.houseseekerdomain.domain.mapping.Mapper;
 import pl.kala.houseseekerdomain.domain.mapping.utils.MapperUtils;
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto;
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto;
+
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class GetHouseMapper implements Mapper<GetHouseMapper.Source, GetHouseDto> {
 
@@ -25,7 +27,7 @@ public class GetHouseMapper implements Mapper<GetHouseMapper.Source, GetHouseDto
                 .price(source.getHouse().getPrice())
                 .squareMeters(source.getHouse().getSquareMeters())
                 .houseKind(source.getHouse().getHouseKind().getLabel())
-                .mediaList(source.getHouse().getMediaList() == null ? List.empty() : List.ofAll(source.getHouse().getMediaList().map(Media::getLabel)))
+                .mediaList(source.getHouse().getMediaList() == null ? Collections.emptyList() : source.getHouse().getMediaList().stream().map(Media::getLabel).collect(Collectors.toList()))
                 .houseState(source.getHouse().getHouseState() == null ? MapperUtils.emptyString() : source.getHouse().getHouseState().getLabel())
                 .heatingKind(source.getHouse().getHeatingKind() == null ? MapperUtils.emptyString() : source.getHouse().getHeatingKind().getLabel())
                 .floor(source.getHouse().getFloor())

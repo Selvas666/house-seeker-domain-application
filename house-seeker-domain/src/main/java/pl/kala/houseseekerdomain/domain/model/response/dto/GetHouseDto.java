@@ -1,10 +1,12 @@
 package pl.kala.houseseekerdomain.domain.model.response.dto;
 
-import io.vavr.collection.List;
+
 import lombok.Builder;
 import lombok.Value;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
