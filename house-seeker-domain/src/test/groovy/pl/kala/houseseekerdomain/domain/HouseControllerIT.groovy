@@ -4,7 +4,6 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import lombok.extern.slf4j.Slf4j
-import org.hamcrest.Matchers
 import org.springframework.http.HttpStatus
 import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
 
