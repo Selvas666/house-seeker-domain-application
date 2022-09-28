@@ -4,6 +4,8 @@ package pl.kala.houseseekerdomain.domain.logic.house;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import pl.kala.houseseekerdomain.database.model.document.house.House;
 import pl.kala.houseseekerdomain.database.model.document.locality.Locality;
 import pl.kala.houseseekerdomain.database.repository.HouseRepository;
@@ -14,10 +16,11 @@ import pl.kala.houseseekerdomain.domain.mapping.response.GetHouseMapper;
 import pl.kala.houseseekerdomain.domain.mapping.response.GetLocalityMapper;
 import pl.kala.houseseekerdomain.domain.model.request.CreateHouseRequest;
 import pl.kala.houseseekerdomain.domain.model.response.GetAllHousesResponse;
+import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto;
 import pl.kala.houseseekerdomain.domain.model.response.dto.GetLocalityDto;
 
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -36,15 +39,17 @@ public class HouseFacade implements HouseApi {
     private final CreateHouseMapper createHouseMapper;
 
     @Override
-    public Try<GetAllHousesResponse> getAllHouses() {
-        return Try.of(() -> getAllHousesMapper.convert(
-                houseRepository.findAll().stream().map(n -> {
-                    GetLocalityDto getLocalityDto = getLocalityMapper
-                            .convert(localityRepository.findById(n.getLocalityId())
-                                    .orElseThrow(() -> new RuntimeException("Unknown locality id: " + n.getLocalityId())));
-                    return getHouseMapper.convert(GetHouseMapper.Source.of(n, getLocalityDto));
-                }).collect(Collectors.toList())
-        ));
+    public Try<GetAllHousesResponse> getAllHouses(int page, int size) {
+        return Try.of(() -> {
+            Page<House> pagedHouses = houseRepository.findAll(PageRequest.of(page, size));
+            List<GetHouseDto> getHouseDtoList = pagedHouses.stream().map(n -> {
+                GetLocalityDto getLocalityDto = getLocalityMapper
+                        .convert(localityRepository.findById(n.getLocalityId())
+                                .orElseThrow(() -> new RuntimeException("Unknown locality id: " + n.getLocalityId())));
+                return getHouseMapper.convert(GetHouseMapper.Source.of(n, getLocalityDto));
+            }).toList();
+            return getAllHousesMapper.convert(GetAllHousesMapper.Source.of(pagedHouses, getHouseDtoList));
+        });
     }
 
     @Override

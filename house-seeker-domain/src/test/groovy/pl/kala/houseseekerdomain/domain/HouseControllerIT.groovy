@@ -4,6 +4,7 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import lombok.extern.slf4j.Slf4j
+import org.springframework.http.HttpStatus
 import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
 
 @Slf4j
@@ -38,7 +39,17 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
         saveRequest.post()
         def result = getRequest.get()
         then: "We get a list of two houses in return"
-        result.statusCode() == 200
+        result.statusCode() == HttpStatus.OK.value()
         result.body().jsonPath().getList("houses").size() == 2
+    }
+
+    def "I can call GetAllHouses on empty data base"(){
+        given: "A proper config"
+        RequestSpecification getRequest = RestAssured.given()
+        getRequest.basePath("/api/house/all")
+        when: "We tray to get all houses"
+        def result = getRequest.get()
+        then: "The result returns no content"
+        result.statusCode() == HttpStatus.NO_CONTENT.value()
     }
 }

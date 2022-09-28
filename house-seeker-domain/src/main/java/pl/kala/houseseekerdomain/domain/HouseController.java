@@ -26,10 +26,14 @@ public class HouseController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<GetAllHousesResponse> getAllHouses() {
-        GetAllHousesResponse response = houseApi.getAllHouses()
+    ResponseEntity<GetAllHousesResponse> getAllHouses(@RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "10") int size) {
+        GetAllHousesResponse response = houseApi.getAllHouses(page, size)
                 .onFailure(ex -> log.error("Failed to get all houses - {}", ex.getMessage()))
                 .get();
+        if (response.getTotalElements() == 0) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(response);
     }
 
