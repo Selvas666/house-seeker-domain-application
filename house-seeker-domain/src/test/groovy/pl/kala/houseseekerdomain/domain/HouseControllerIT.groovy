@@ -11,7 +11,7 @@ import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
 class HouseControllerIT extends IntegrationSpecificationConfiguration {
 
     def "I can save a house"() {
-        given: "A proper config"
+        given: "A proper request config"
         RequestSpecification request = RestAssured.given()
         request.basePath("/api/house/save")
         and: "A minimum possible body for saving a house"
@@ -25,7 +25,7 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
     }
 
     def "I can get 2 houses I can save"() {
-        given: "A proper config"
+        given: "A proper request config"
         RequestSpecification saveRequest = RestAssured.given()
         saveRequest.basePath("/api/house/save")
         RequestSpecification getRequest = RestAssured.given()
@@ -43,13 +43,42 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
         result.body().jsonPath().getList("houses").size() == 2
     }
 
-    def "I can call GetAllHouses on empty data base"(){
-        given: "A proper config"
+    def "I can call GetAllHouses on empty data base"() {
+        given: "A proper request config"
         RequestSpecification getRequest = RestAssured.given()
         getRequest.basePath("/api/house/all")
         when: "We tray to get all houses"
         def result = getRequest.get()
         then: "The result returns no content"
         result.statusCode() == HttpStatus.NO_CONTENT.value()
+    }
+
+    def "GetAllHouses request parameters are properly understood and paging is calculated accordingly"() {
+        given: "A proper request config"
+        RequestSpecification getRequest = RestAssured.given()
+        getRequest.basePath("/api/house/all")
+        and: "A DB populated with 3 houses"
+        def numberOfHouses = 3
+        RequestSpecification saveRequest = RestAssured.given()
+        saveRequest.basePath("/api/house/save")
+        File body = new File("src/test/resources/json/request/saveHouseMin.json")
+        saveRequest.contentType(ContentType.JSON)
+        saveRequest.body(body)
+        for (int i = 1; i <= numberOfHouses; i++) {
+            saveRequest.post()
+        }
+        and: "Request params: page = 1, size = 1"
+        def page = 1
+        def size = 1
+        getRequest.param("page", page)
+        getRequest.param("size", size)
+        when: "We tray to get all houses"
+        def result = getRequest.get()
+        then: "The result has: pageNumber = page, totalPages = numberOfHouses, pageSize = size, totalElements = numberOfHouses"
+        result.body().jsonPath().get("pageNumber") == page
+        result.body().jsonPath().get("totalPages") == numberOfHouses
+        result.body().jsonPath().get("pageSize") == size
+        result.body().jsonPath().get("totalElements") == numberOfHouses
+
     }
 }
