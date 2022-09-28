@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kala.houseseekerdomain.domain.logic.house.HouseApi;
 import pl.kala.houseseekerdomain.domain.model.request.CreateHouseRequest;
 import pl.kala.houseseekerdomain.domain.model.response.GetAllHousesResponse;
+import pl.kala.houseseekerdomain.domain.model.response.dto.GetHouseDto;
 
 @Slf4j
 @RestController
@@ -18,11 +19,11 @@ public class HouseController {
     private final HouseApi houseApi;
 
     @PostMapping("/save")
-    ResponseEntity<Void> saveHouse(@RequestBody CreateHouseRequest request) {
-        //TODO: add return type
-        houseApi.saveHouse(request)
-                .onFailure(ex -> log.error("Failed to save house - {}", ex.getMessage()));
-        return ResponseEntity.ok().build();
+    ResponseEntity<GetHouseDto> saveHouse(@RequestBody CreateHouseRequest request) {
+        GetHouseDto response = houseApi.saveHouse(request)
+                .onFailure(ex -> log.error("Failed to save house - {}", ex.getMessage()))
+                .get();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")

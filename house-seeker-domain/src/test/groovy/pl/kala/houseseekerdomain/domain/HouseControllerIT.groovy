@@ -4,11 +4,13 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import lombok.extern.slf4j.Slf4j
+import org.hamcrest.Matchers
 import org.springframework.http.HttpStatus
 import pl.kala.houseseekerdomain.IntegrationSpecificationConfiguration
 
 @Slf4j
 class HouseControllerIT extends IntegrationSpecificationConfiguration {
+    //TODO: schema validation
 
     def "I can save a house"() {
         given: "A proper request config"
@@ -22,6 +24,7 @@ class HouseControllerIT extends IntegrationSpecificationConfiguration {
         def result = request.post()
         then: "It should return code 200"
         result.statusCode() == 200
+        !result.body().jsonPath().getString(".").isEmpty()
     }
 
     def "I can get 2 houses I can save"() {

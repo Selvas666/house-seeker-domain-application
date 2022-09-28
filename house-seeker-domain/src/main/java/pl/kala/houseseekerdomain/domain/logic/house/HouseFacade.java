@@ -53,7 +53,7 @@ public class HouseFacade implements HouseApi {
     }
 
     @Override
-    public Try<House> saveHouse(CreateHouseRequest createHouseRequest) {
+    public Try<GetHouseDto> saveHouse(CreateHouseRequest createHouseRequest) {
         return Try.of(() -> {
             String localityName = createHouseRequest.getLocality();
             Locality locality = localityRepository.findLocalityByNameIgnoreCase(localityName)
@@ -62,7 +62,9 @@ public class HouseFacade implements HouseApi {
                                     .name(localityName)
                                     .entryDate(LocalDateTime.now())
                                     .build()));
-            return houseRepository.save(createHouseMapper.convert(CreateHouseMapper.Source.of(createHouseRequest, locality)));
+            House savedHouse = houseRepository.save(createHouseMapper.convert(CreateHouseMapper.Source.of(createHouseRequest, locality)));
+            GetLocalityDto getLocalityDto = getLocalityMapper.convert(locality);
+            return getHouseMapper.convert(GetHouseMapper.Source.of(savedHouse, getLocalityDto));
         });
     }
 }
