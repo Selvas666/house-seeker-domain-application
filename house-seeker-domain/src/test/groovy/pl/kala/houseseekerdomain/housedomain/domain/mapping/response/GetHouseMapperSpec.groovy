@@ -3,6 +3,7 @@ package pl.kala.houseseekerdomain.housedomain.domain.mapping.response
 import pl.kala.houseseekerdomain.UnitSpecificationConfiguration
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.House
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.enumeration.HouseKind
+import pl.kala.houseseekerdomain.housedomain.database.model.document.locality.Locality
 import pl.kala.houseseekerdomain.housedomain.domain.model.response.dto.GetHouseDto
 import pl.kala.houseseekerdomain.housedomain.domain.model.response.dto.GetLocalityDto
 
@@ -16,7 +17,7 @@ class GetHouseMapperSpec extends UnitSpecificationConfiguration {
         given: "A House object that has only @NonNull filled in: id, localityId, price, squareMeters, houseKind, pricePerSqMeter, entryDate"
         House house = House.builder()
                 .id("1")
-                .localityId("2")
+                .locality(Locality.random())
                 .price(60000)
                 .squareMeters(60.55)
                 .houseKind(HouseKind.APARTMENT)

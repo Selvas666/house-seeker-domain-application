@@ -44,8 +44,8 @@ public class HouseFacade implements HouseApi {
             Page<House> pagedHouses = houseRepository.findAll(PageRequest.of(page, size));
             List<GetHouseDto> getHouseDtoList = pagedHouses.stream().map(n -> {
                 GetLocalityDto getLocalityDto = getLocalityMapper
-                        .convert(localityRepository.findById(n.getLocalityId())
-                                .orElseThrow(() -> new RuntimeException("Unknown locality id: " + n.getLocalityId())));
+                        .tryConvert(n.getLocality())
+                        .getOrElseThrow(() -> new RuntimeException("No locality found for house with id: " + n.getId()));
                 return getHouseMapper.convert(GetHouseMapper.Source.of(n, getLocalityDto));
             }).toList();
             return getAllHousesMapper.convert(GetAllHousesMapper.Source.of(pagedHouses, getHouseDtoList));

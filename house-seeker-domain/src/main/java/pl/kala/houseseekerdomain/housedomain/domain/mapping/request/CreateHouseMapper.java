@@ -21,7 +21,7 @@ public class CreateHouseMapper implements Mapper<CreateHouseMapper.Source, House
     @Override
     public House convert(CreateHouseMapper.Source source) {
         return House.builder()
-                .localityId(source.getLocality().getId())
+                .locality(source.getLocality())
                 .price(source.getCreateHouseRequest().getPrice())
                 .squareMeters(source.getCreateHouseRequest().getSquareMeters())
                 .mediaList(source.getCreateHouseRequest().getMediaList() != null ? source.getCreateHouseRequest().getMediaList().toJavaList() : null)

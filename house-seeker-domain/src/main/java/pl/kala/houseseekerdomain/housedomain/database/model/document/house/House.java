@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.enumeration.HeatingKind;
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.enumeration.HouseKind;
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.enumeration.HouseState;
 import pl.kala.houseseekerdomain.housedomain.database.model.document.house.enumeration.Media;
+import pl.kala.houseseekerdomain.housedomain.database.model.document.locality.Locality;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,8 +23,9 @@ public class House {
     @Id
     String id;
 
+    @DocumentReference(lazy = true)
     @NonNull
-    private String localityId;
+    private Locality locality;
 
     @NonNull
     private Double price;

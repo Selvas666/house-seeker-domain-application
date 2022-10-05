@@ -31,10 +31,10 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         def result = mapper.convert(source)
         then: "We get a House object with only localityId, price, squareMeters, houseKind, pricePerSqMeter, entryDate"
         result.getId() == null
-        result.getLocalityId() == locality.getId()
-        result.getPrice() == createHouseRequest.getPrice()
-        result.getSquareMeters() == createHouseRequest.getSquareMeters()
-        result.getHouseKind() == createHouseRequest.getHouseKind()
+        result.getLocality() == source.getLocality()
+        result.getPrice() == source.getCreateHouseRequest().getPrice()
+        result.getSquareMeters() == source.getCreateHouseRequest().getSquareMeters()
+        result.getHouseKind() == source.getCreateHouseRequest().getHouseKind()
         result.getPricePerSqMeter() != null
         result.getEntryDate() != null
         result.getMediaList() == null
@@ -58,21 +58,21 @@ class CreateHouseMapperSpec extends UnitSpecificationConfiguration {
         def result = mapper.convert(source)
         then: "We get a House object with all of the fields, properly mapped"
         result.getId() == null
-        result.getLocalityId() == locality.getId()
-        result.getPrice() == createHouseRequest.getPrice()
-        result.getSquareMeters() == createHouseRequest.getSquareMeters()
-        result.getHouseKind() == createHouseRequest.getHouseKind()
+        result.getLocality() == source.getLocality()
+        result.getPrice() == source.getCreateHouseRequest().getPrice()
+        result.getSquareMeters() == source.getCreateHouseRequest().getSquareMeters()
+        result.getHouseKind() == source.getCreateHouseRequest().getHouseKind()
         result.getPricePerSqMeter() != null
         result.getEntryDate() != null
-        result.getMediaList().size() == createHouseRequest.getMediaList().length()
-        result.getMediaList().get(0) == createHouseRequest.getMediaList().get(0)
-        result.getHouseState() == createHouseRequest.getHouseState()
-        result.getHeatingKind() == createHouseRequest.getHeatingKind()
-        result.getFloor() == createHouseRequest.getFloor()
-        result.getElevator() == createHouseRequest.getElevator()
-        result.getBuildDate() == createHouseRequest.getBuildDate()
-        result.getHasBalcony() == createHouseRequest.getHasBalcony()
-        result.getHasBasement() == createHouseRequest.getHasBasement()
+        result.getMediaList().size() == source.getCreateHouseRequest().getMediaList().length()
+        result.getMediaList().get(0) == source.getCreateHouseRequest().getMediaList().get(0)
+        result.getHouseState() == source.getCreateHouseRequest().getHouseState()
+        result.getHeatingKind() == source.getCreateHouseRequest().getHeatingKind()
+        result.getFloor() == source.getCreateHouseRequest().getFloor()
+        result.getElevator() == source.getCreateHouseRequest().getElevator()
+        result.getBuildDate() == source.getCreateHouseRequest().getBuildDate()
+        result.getHasBalcony() == source.getCreateHouseRequest().getHasBalcony()
+        result.getHasBasement() == source.getCreateHouseRequest().getHasBasement()
     }
 
     def "Test PricePerSqMeter calculation"() {
