@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.context.TestPropertySource
-import pl.kala.houseseekerdomain.database.repository.HouseRepository
-import pl.kala.houseseekerdomain.database.repository.LocalityRepository
+import pl.kala.houseseekerdomain.housedomain.database.repository.HouseRepository
+import pl.kala.houseseekerdomain.housedomain.database.repository.LocalityRepository
 import spock.lang.Specification
 
 @Slf4j
