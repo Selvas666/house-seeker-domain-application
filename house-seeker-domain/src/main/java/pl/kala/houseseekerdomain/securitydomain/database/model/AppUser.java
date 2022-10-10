@@ -6,6 +6,7 @@ import lombok.Data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
@@ -15,14 +16,15 @@ import java.util.List;
 public class AppUser {
 
     @Id
-    String email;
-
-    @NonNull
-    private String password;
+    String id;
 
     @NonNull
     private String username;
 
     @NonNull
+    private String password;
+
+    @NonNull
+    @DocumentReference
     List<AppRole> roles;
 }
